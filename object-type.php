@@ -31,6 +31,10 @@ class CetakInfoProduk
     }
 }
 
+function cetakProduk(Produk $produk)
+{
+    return "{$produk->judul}";
+}
 
 
 
@@ -39,6 +43,8 @@ $produk1 = new Produk("Naruto", "Masashi Kishimoto", "Shonen Jump", 30000);
 $produk2 = new Produk("Uncharted", "Neil Druckman", "Sony Computer", 250000);
 
 var_dump($produk1);
+
+echo cetakProduk($produk2);
 
 echo "Komik : " . $produk1->getLabel();
 echo "<br>";
