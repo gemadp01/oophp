@@ -6,8 +6,9 @@ class Produk
 {
     public $judul,
         $penulis,
-        $penerbit,
-        $harga;
+        $penerbit;
+    protected $diskon;
+    private $harga;
 
 
     public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0)
@@ -17,6 +18,11 @@ class Produk
         $this->penerbit = $penerbit;
         $this->harga = $harga;
         
+    }
+    
+
+    public function getHarga() {
+        return $this->harga - ($this->harga * $this->diskon / 100);
     }
 
     public function getLabel()
@@ -59,11 +65,18 @@ class Game extends Produk
         parent::__construct($judul, $penulis, $penerbit, $harga);
         $this->waktuMain = $waktuMain;
     }
+
+    public function setDiskon($diskon) {
+        $this->diskon = $diskon;
+    }
+
     public function getInfoProduk()
     {
-        $str = "Game : " . parent::getInfoProduk() . " (Rp. {$this->harga}) - {$this->waktuMain} Jam.";
+        $str = "Game : " . parent::getInfoProduk() . " - {$this->waktuMain} Jam.";
         return $str;
     }
+
+    
 }
 
 // Class CetakInfoProduk merupakan kelas untuk mencetak 
@@ -91,3 +104,8 @@ $produk2 = new Game("Uncharted", "Neil Druckman", "Sony Computer", 250000, 50);
 echo $produk1->getInfoProduk();
 echo "<br>";
 echo $produk2->getInfoProduk();
+echo "<hr>";
+
+// $produk2->setDiskon(50);
+// $produk2->diskon = 90;
+echo $produk2->getHarga();
